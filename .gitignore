@@ -1,6 +1,3 @@
-# Executables
-megaphone
-
 # Prerequisites
 *.d
 
@@ -34,3 +31,9 @@ objs/
 *.exe
 *.out
 *.app
+megaphone
+phonebook
+
+# Other
+.vscode
+DS_Store
