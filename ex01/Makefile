@@ -1,5 +1,5 @@
 ### PROGRAM NAME ###
-NAME		:= megaphone
+NAME		:= phonebook
 
 ### UTILS ###
 CC			:= c++
@@ -17,7 +17,9 @@ INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
 
 ### FILES ###
-SRC 		:=	megaphone.cpp
+SRC 		:=	main.cpp \
+				Contact.cpp \
+				PhoneBook.cpp
 INCLUDES	:=	$(INCLD_DIR)
 INCLD_FLAG 	:= 	$(addprefix -I , $(INCLUDES))
 OBJS 		:= 	$(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))
