@@ -10,9 +10,9 @@ PhoneBook::~PhoneBook()
 {
 }
 
-Contact		PhoneBook::get_contact(int index)
+Contact		*PhoneBook::get_contact(int index)
 {
-	return this->contact[index];
+	return &this->contact[index];
 }
 
 int	PhoneBook::get_next()
@@ -27,13 +27,13 @@ int	PhoneBook::get_len()
 
 void	PhoneBook::set_contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret)
 {
-	Contact	new_contact = get_contact(this->next);
+	Contact	*new_contact = get_contact(this->next);
 
-	new_contact.set_fname(fname);
-	new_contact.set_lname(lname);
-	new_contact.set_nname(nname);
-	new_contact.set_phone(phone);
-	new_contact.set_secret(secret);
+	new_contact->set_fname(fname);
+	new_contact->set_lname(lname);
+	new_contact->set_nname(nname);
+	new_contact->set_phone(phone);
+	new_contact->set_secret(secret);
 	if (this->next >= 7)
 		this->set_next(0);
 	else

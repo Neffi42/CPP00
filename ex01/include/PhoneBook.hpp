@@ -12,7 +12,7 @@ private:
 public:
 	PhoneBook();
 	~PhoneBook();
-	Contact	get_contact(int index);
+	Contact	*get_contact(int index);
 	int		get_next();
 	int		get_len();
 	void	set_contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret);
