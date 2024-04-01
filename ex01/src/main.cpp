@@ -1,14 +1,29 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstdlib>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
 #define ACTION "Please enter ADD to create a new contact, SEARCH to look for an existing contact, EXIT to quit the program"
+#define CONTINUE "Please press enter to continue"
 
 std::string trim(std::string s)
 {
-	s.erase(std::remove_if(s.begin(), s.end(), ::isspace), s.end());
+	for (size_t i = 0; s[i]; i++)
+	{
+		if (isspace(s[i]))
+			s.erase(i--, 1);
+		else
+			break;
+	}
+	for (size_t i = s.length() - 1; i > 0; i--)
+	{
+		if (isspace(s[i]))
+			s.erase(i++, 1);
+		else
+			break;
+	}
 	return s;
 }
 
@@ -21,22 +36,28 @@ std::string	get_input(std::string message)
 	return trim(s);
 }
 
+void	input_clear(std::string message)
+{
+	get_input(message);
+	system("clear");
+}
+
 void	add(PhoneBook *book)
 {
 	Contact new_contact;
 
-	while (new_contact.get_fname().empty())
+	while (new_contact.get_fname().length() == 0)
 		new_contact.set_fname(get_input("Please enter new contact's first name"));
-	while (new_contact.get_lname().empty())
+	while (new_contact.get_lname().length() == 0)
 		new_contact.set_lname(get_input("Please enter new contact's last name"));
-	while (new_contact.get_nname().empty())
+	while (new_contact.get_nname().length() == 0)
 		new_contact.set_nname(get_input("Please enter new contact's nickname"));
-	while (new_contact.get_phone().empty())
-		new_contact.set_phone(get_input("Please enter new contact's phone"));
-	while (new_contact.get_secret().empty())
+	while (new_contact.get_phone().length() == 0)
+		new_contact.set_phone(get_input("Please enter new contact's phone number"));
+	while (new_contact.get_secret().length() == 0)
 		new_contact.set_secret(get_input("Please enter new contact's darkest secret"));
 	book->set_contact(new_contact.get_fname(), new_contact.get_lname(), new_contact.get_nname(), new_contact.get_phone(), new_contact.get_secret());
-	system("clear");
+	input_clear(CONTINUE);
 }
 
 std::string	format_string(std::string s)
@@ -61,10 +82,7 @@ void	search(PhoneBook book)
 	std::string	index = "";
 
 	if (len == 0)
-	{
-		std::cout << "No contact in the phonebook, please add some" << std::endl;
-		return;
-	}
+		return input_clear("No contact in the phonebook, please add some\n" CONTINUE);
 	format_print("index", "first name", "last name","nickname");
 	for (int i = 0; i < len; i++)
 	{
@@ -73,7 +91,16 @@ void	search(PhoneBook book)
 		index[0] += i;
 		format_print(index, tmp->get_fname(), tmp->get_lname(), tmp->get_nname());
 	}
+	index = get_input("Please choose the contact that you wish to acces to");
+	while (index.length() == 0 || index.length() > 1 || !::isdigit(index[0]) || index[0] >= len + '0')
+			index = get_input("Wrong index, please choose the contact that you wish to acces to");
 	system("clear");
+	std::cout << "First name:\t" << book.get_contact(index[0] - '0')->get_fname() << std::endl;
+	std::cout << "Last name:\t" << book.get_contact(index[0] - '0')->get_lname() << std::endl;
+	std::cout << "Nickname:\t" << book.get_contact(index[0] - '0')->get_nname() << std::endl;
+	std::cout << "Phone number:\t" << book.get_contact(index[0] - '0')->get_phone() << std::endl;
+	std::cout << "Darkest secret:\t" << book.get_contact(index[0] - '0')->get_secret() << std::endl;
+	input_clear(CONTINUE);
 }
 
 int main()
