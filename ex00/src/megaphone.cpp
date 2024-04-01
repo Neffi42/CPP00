@@ -10,7 +10,8 @@ int main(int argc, char const *argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		s = argv[i];
-		transform(s.begin(), s.end(), s.begin(), ::toupper);
+		for (size_t j = 0; s[j]; j++)
+			s[j] = toupper(s[j]);
 		std::cout << s << std::endl;
 	}
 	return 0;
