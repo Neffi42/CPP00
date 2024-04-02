@@ -12,7 +12,7 @@ private:
 	const std::string _phone;
 	const std::string _secret;
 public:
-	Contact(std::string &fname, std::string &lname, std::string &nname, std::string &phone, std::string &secret);
+	Contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret);
 	~Contact();
 	const std::string	&get_fname();
 	const std::string	&get_lname();
