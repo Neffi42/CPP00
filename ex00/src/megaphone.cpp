@@ -1,9 +1,9 @@
  #include <iostream>
- #include <string.h>
+ #include <string>
 
 int main(int argc, char const *argv[])
 {
-	std::string s = "";
+	std::string s;
 
 	if (argc == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
@@ -12,7 +12,8 @@ int main(int argc, char const *argv[])
 		s = argv[i];
 		for (size_t j = 0; s[j]; j++)
 			s[j] = toupper(s[j]);
-		std::cout << s << std::endl;
+		std::cout << s;
 	}
+	std::cout << std::endl;
 	return 0;
 }

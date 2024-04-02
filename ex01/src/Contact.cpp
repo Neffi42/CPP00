@@ -1,64 +1,33 @@
 #include "Contact.hpp"
 
-Contact::Contact()
-{
-	this->set_fname("");
-	this->set_lname("");
-	this->set_nname("");
-	this->set_phone("");
-	this->set_secret("");
-}
+Contact::Contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret)
+: _fname(fname), _lname(lname), _nname(nname), _phone(phone), _secret(secret){}
 
 Contact::~Contact()
 {
 }
 
-const std::string	Contact::get_fname()
+const std::string	&Contact::get_fname()
 {
-	return this->fname;
+	return this->_fname;
 }
 
-const std::string	Contact::get_lname()
+const std::string	&Contact::get_lname()
 {
-	return this->lname;
+	return this->_lname;
 }
 
-const std::string	Contact::get_nname()
+const std::string	&Contact::get_nname()
 {
-	return this->nname;
+	return this->_nname;
 }
 
-const std::string	Contact::get_phone()
+const std::string	&Contact::get_phone()
 {
-	return this->phone;
+	return this->_phone;
 }
 
-const std::string	Contact::get_secret()
+const std::string	&Contact::get_secret()
 {
-	return this->secret;
-}
-
-void	Contact::set_fname(std::string fname)
-{
-	this->fname = fname;
-}
-
-void	Contact::set_lname(std::string lname)
-{
-	this->lname = lname;
-}
-
-void	Contact::set_nname(std::string nname)
-{
-	this->nname = nname;
-}
-
-void	Contact::set_phone(std::string phone)
-{
-	this->phone = phone;
-}
-
-void	Contact::set_secret(std::string secret)
-{
-	this->secret = secret;
+	return this->_secret;
 }

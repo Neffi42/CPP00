@@ -3,12 +3,12 @@ NAME		:= megaphone
 
 ### UTILS ###
 CC			:= c++
-CFLAGS		:= -Wall -Wextra -Werror -std=c++98
+CPPFLAGS		:= -Wall -Wextra -Werror -std=c++98
 DEP_FLAGS	:= -MMD -MP
 MAKE_FLAG	:= --no-print-directory --silent
 RM			:= rm -rf
 ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
-	CFLAGS += -g3
+	CPPFLAGS += -g3
 endif
 
 ### DIRECTORIES ###
@@ -41,14 +41,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "$(NEW)$(PURPLE)[$(NAME)] $(UGREEN)Building:$(DEFAULT)$(BWHITE) $@$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(OBJS) $(INCLD_FLAG) -o $@
+	@$(CC) $(CPPFLAGS) $(OBJS) $(INCLD_FLAG) -o $@
 	@printf "\n"
 
 -include $(DEPS)
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@printf "$(NEW)$(PURPLE)[$(NAME)] $(UGREEN)Building:$(DEFAULT) $<"
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(DEP_FLAGS) $(CFLAGS) $(INCLD_FLAG) -c $< -o $@
+	@$(CC) $(DEP_FLAGS) $(CPPFLAGS) $(INCLD_FLAG) -c $< -o $@
 
 clean: ; @printf "$(PURPLE)[$(NAME)] $(RED)Removing $(DEFAULT)$(OBJS_DIR) files\n"
 	@$(RM) $(OBJS_DIR)
