@@ -31,8 +31,6 @@ objs/
 *.exe
 *.out
 *.app
-megaphone
-phonebook
 
 # Other
 .vscode
