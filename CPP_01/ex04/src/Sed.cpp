@@ -1,11 +1,10 @@
 #include "Sed.hpp"
 
-Sed::Sed(std::string name, std::string find, std::string replace) {
-	this->_name = name;
+Sed::Sed(char *name, std::string find, std::string replace) {
 	this->_find = find;
 	this->_replace = replace;
 	this->_in.open(name);
-	this->_out.open(name + ".replace", std::ofstream::out | std::ofstream::trunc);
+	this->_out.open(std::strcat(name, ".replace"), std::ofstream::out | std::ofstream::trunc);
 }
 
 Sed::~Sed() {
@@ -20,12 +19,12 @@ void Sed::copyFile() {
 	{
 		getline(this->_in, line);
 		if (this->_find != this->_replace)
-			this->replaceAll(line);
+			this->_replaceAll(line);
 		this->_out << line << std::endl;
 	}
 }
 
-void Sed::replaceAll(std::string &line) {
+void Sed::_replaceAll(std::string &line) {
 	std::size_t needle = line.find(this->_find);
 
 	while (needle != std::string::npos)
