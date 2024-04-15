@@ -14,7 +14,10 @@ int main()
 	while (s != "EXIT")
 	{
 		if (s == "ADD")
-			book.add();
+		{
+			if (book.add())
+				return 1;
+		}
 		else if (s == "SEARCH")
 			book.search();
 		if (!std::cin.eof())

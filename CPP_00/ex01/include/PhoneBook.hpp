@@ -22,7 +22,7 @@ public:
 	PhoneBook();
 	~PhoneBook();
 	void	search();
-	void	add();
+	int	add();
 };
 
 #endif

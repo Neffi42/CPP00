@@ -54,15 +54,25 @@ std::string	PhoneBook::_get_input(std::string message)
 	return s;
 }
 
-void	PhoneBook::add()
+int	PhoneBook::add()
 {
-	Contact *contact = new Contact(
-	_get_input("Please enter new contact's first name"),
-	_get_input("Please enter new contact's last name"),
-	_get_input("Please enter new contact's nickname"),
-	_get_input("Please enter new contact's phone number"),
-	_get_input("Please enter new contact's darkest secret"));
+	Contact	*contact;
+
+	try {
+		contact = new Contact(
+		_get_input("Please enter new contact's first name"),
+		_get_input("Please enter new contact's last name"),
+		_get_input("Please enter new contact's nickname"),
+		_get_input("Please enter new contact's phone number"),
+		_get_input("Please enter new contact's darkest secret")
+		);
+	}
+	catch(const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return 1;
+	}
 	_set_contact(contact);
+	return 0;
 }
 
 std::string	PhoneBook::_intToString(int n)
