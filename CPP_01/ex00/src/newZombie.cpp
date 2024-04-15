@@ -4,12 +4,10 @@ Zombie	*newZombie(std::string name)
 {
 	Zombie *zonzon;
 
-	try
-	{
+	try {
 		zonzon = new Zombie(name);
 	}
-	catch(const std::exception& e)
-	{
+	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
 		return NULL;
 	}
