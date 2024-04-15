@@ -17,8 +17,11 @@ int main()
 			book.add();
 		else if (s == "SEARCH")
 			book.search();
-		std::cout << "Please enter ADD to create a new contact, SEARCH to look for an existing contact, EXIT to quit the program" << std::endl;
+		if (!std::cin.eof())
+			std::cout << "Please enter ADD to create a new contact, SEARCH to look for an existing contact, EXIT to quit the program" << std::endl;
 		std::getline(std::cin, s);
+		if (std::cin.eof())
+			return 0;
 	}
 	return 0;
 }

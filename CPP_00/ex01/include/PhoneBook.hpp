@@ -3,6 +3,8 @@
 
 # include <iostream>
 # include <string>
+# include <sstream>
+# include <cstdlib>
 # include "Contact.hpp"
 
 class PhoneBook
@@ -15,6 +17,7 @@ private:
 	std::string	_format_string(std::string s);
 	std::string	_get_input(std::string message);
 	void		_set_contact(Contact *contact);
+	std::string	_intToString(int n);
 public:
 	PhoneBook();
 	~PhoneBook();

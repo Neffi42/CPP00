@@ -44,9 +44,13 @@ std::string	PhoneBook::_get_input(std::string message)
 {
 	std::string	s;
 
-	std::cout << message << std::endl;
+	if (!std::cin.eof())
+		std::cout << message << std::endl;
 	std::getline(std::cin, s);
-	s = s.empty() ? (std::cout << "Error: input cannot be empty" << std::endl, _get_input(message)) : s;
+	if (std::cin.eof())
+		s.clear();
+	else
+		s = s.empty() ? (std::cout << "Error: input cannot be empty" << std::endl, _get_input(message)) : s;
 	return s;
 }
 
@@ -61,6 +65,13 @@ void	PhoneBook::add()
 	_set_contact(contact);
 }
 
+std::string	PhoneBook::_intToString(int n)
+{
+	std::ostringstream ss;
+	ss << n;
+	return (ss.str());
+}
+
 void	PhoneBook::search()
 {
 	std::string	index;
@@ -72,10 +83,14 @@ void	PhoneBook::search()
 	}
 	_format_print("index", "first name", "last name","nickname");
 	for (int i = 0; i < this->_len; i++)
-		_format_print(std::to_string(i), this->_contact[i]->get_fname(), this->_contact[i]->get_lname(), this->_contact[i]->get_nname());
+		_format_print(this->_intToString(i), this->_contact[i]->get_fname(), this->_contact[i]->get_lname(), this->_contact[i]->get_nname());
 	index = _get_input("Please choose the contact that you wish to acces to");
-	while (index.length() == 0 || index.length() > 1 || !::isdigit(index[0]) || index[0] >= this->_len + '0')
-			index = _get_input("Wrong index, please choose the contact that you wish to acces to");
+	if (std::cin.eof())
+		return ;
+	while (!std::cin.eof() && (index.length() == 0 || index.length() > 1 || !::isdigit(index[0]) || index[0] >= this->_len + '0'))
+		index = _get_input("Wrong index, please choose the contact that you wish to acces to");
+	if (std::cin.eof())
+		return ;
 	std::cout << "First name:\t" << this->_contact[index[0] - '0']->get_fname() << std::endl;
 	std::cout << "Last name:\t" << this->_contact[index[0] - '0']->get_lname() << std::endl;
 	std::cout << "Nickname:\t" << this->_contact[index[0] - '0']->get_nname() << std::endl;
