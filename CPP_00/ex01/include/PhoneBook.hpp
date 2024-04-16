@@ -18,6 +18,7 @@ private:
 	std::string	_get_input(std::string message);
 	void		_set_contact(Contact *contact);
 	std::string	_intToString(int n);
+	bool		_check_input(std::string s);
 public:
 	PhoneBook();
 	~PhoneBook();

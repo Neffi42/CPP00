@@ -40,6 +40,24 @@ void	PhoneBook::_format_print(std::string index, std::string fname, std::string 
 	std::cout.width(10); std::cout << std::right << _format_string(nname) << std::endl;
 }
 
+bool	PhoneBook::_check_input(std::string s)
+{
+	if (s.empty())
+	{
+		std::cout << "Error: input cannot be empty" << std::endl;
+		return false;
+	}
+	for (size_t i = 0; s[i]; i++)
+	{
+		if (!isalnum(s[i]))
+		{
+			std::cout << "Error: input can only contain alnum chars" << std::endl;
+			return false;
+		}
+	}
+	return true;
+}
+
 std::string	PhoneBook::_get_input(std::string message)
 {
 	std::string	s;
@@ -50,7 +68,7 @@ std::string	PhoneBook::_get_input(std::string message)
 	if (std::cin.eof())
 		s.clear();
 	else
-		s = s.empty() ? (std::cout << "Error: input cannot be empty" << std::endl, _get_input(message)) : s;
+		s = this->_check_input(s) ? s : _get_input(message);
 	return s;
 }
 
