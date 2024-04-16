@@ -10,15 +10,15 @@
 class PhoneBook
 {
 private:
-	Contact		*_contact[8];
-	int			_next;
-	int			_len;
-	void		_format_print(std::string index, std::string fname, std::string lname, std::string nname);
-	std::string	_format_string(std::string s);
-	std::string	_get_input(std::string message);
-	void		_set_contact(Contact *contact);
-	std::string	_intToString(int n);
-	bool		_check_input(std::string s);
+	Contact		*contact[8];
+	int			next;
+	int			len;
+	void		formatPrint(std::string index, std::string fname, std::string lname, std::string nname);
+	std::string	formatString(std::string s);
+	std::string	getInput(std::string message);
+	void		setContact(Contact *contact);
+	std::string	intToString(int n);
+	bool		checkInput(std::string s);
 public:
 	PhoneBook();
 	~PhoneBook();

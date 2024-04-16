@@ -6,19 +6,19 @@
 class Contact
 {
 private:
-	const std::string _fname;
-	const std::string _lname;
-	const std::string _nname;
-	const std::string _phone;
-	const std::string _secret;
+	const std::string fname;
+	const std::string lname;
+	const std::string nname;
+	const std::string phone;
+	const std::string secret;
 public:
-	Contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret);
+	Contact(const std::string &fname, const std::string &lname, const std::string &nname, const std::string &phone, const std::string &secret);
 	~Contact();
-	const std::string	&get_fname();
-	const std::string	&get_lname();
-	const std::string	&get_nname();
-	const std::string	&get_phone();
-	const std::string	&get_secret();
+	const std::string	&getFname();
+	const std::string	&getLname();
+	const std::string	&getNname();
+	const std::string	&getPhone();
+	const std::string	&getSecret();
 };
 
 #endif

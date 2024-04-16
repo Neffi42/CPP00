@@ -1,33 +1,33 @@
 #include "Contact.hpp"
 
-Contact::Contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret)
-: _fname(fname), _lname(lname), _nname(nname), _phone(phone), _secret(secret){}
+Contact::Contact(const std::string &fname, const std::string &lname, const std::string &nname, const std::string &phone, const std::string &secret)
+: fname(fname), lname(lname), nname(nname), phone(phone), secret(secret){}
 
 Contact::~Contact()
 {
 }
 
-const std::string	&Contact::get_fname()
+const std::string	&Contact::getFname()
 {
-	return this->_fname;
+	return this->fname;
 }
 
-const std::string	&Contact::get_lname()
+const std::string	&Contact::getLname()
 {
-	return this->_lname;
+	return this->lname;
 }
 
-const std::string	&Contact::get_nname()
+const std::string	&Contact::getNname()
 {
-	return this->_nname;
+	return this->nname;
 }
 
-const std::string	&Contact::get_phone()
+const std::string	&Contact::getPhone()
 {
-	return this->_phone;
+	return this->phone;
 }
 
-const std::string	&Contact::get_secret()
+const std::string	&Contact::getSecret()
 {
-	return this->_secret;
+	return this->secret;
 }

@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		s = argv[i];
-		for (size_t j = 0; s[j]; j++)
+		for (size_t j = 0; j < s.size(); j++)
 			s[j] = toupper(s[j]);
 		std::cout << s;
 	}

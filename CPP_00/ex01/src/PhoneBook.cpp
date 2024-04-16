@@ -2,45 +2,45 @@
 
 PhoneBook::PhoneBook()
 {
-	this->_next = 0;
-	this->_len = 0;
+	this->next = 0;
+	this->len = 0;
 }
 
 PhoneBook::~PhoneBook()
 {
-	for (int i = 0; i < this->_len; i++)
-		delete this->_contact[i];
+	for (int i = 0; i < this->len; i++)
+		delete this->contact[i];
 }
 
-void	PhoneBook::_set_contact(Contact *contact)
+void	PhoneBook::setContact(Contact *contact)
 {
-	if (this->_len == 8)
-		delete this->_contact[this->_next];
-	this->_contact[this->_next] = contact;
-	if (this->_next >= 7)
-		this->_next = 0;
+	if (this->len == 8)
+		delete this->contact[this->next];
+	this->contact[this->next] = contact;
+	if (this->next >= 7)
+		this->next = 0;
 	else
-		this->_next += 1;
-	if (this->_len < 8)
-		this->_len += 1;
+		this->next += 1;
+	if (this->len < 8)
+		this->len += 1;
 }
 
-std::string	PhoneBook::_format_string(std::string s)
+std::string	PhoneBook::formatString(std::string s)
 {
 	if (s.length() > 10)
 		return s.substr(0, 9) + ".";
 	return s;
 }
 
-void	PhoneBook::_format_print(std::string index, std::string fname, std::string lname, std::string nname)
+void	PhoneBook::formatPrint(std::string index, std::string fname, std::string lname, std::string nname)
 {
-	std::cout.width(10); std::cout << std::right << _format_string(index) << "|";
-	std::cout.width(10); std::cout << std::right << _format_string(fname) << "|";
-	std::cout.width(10); std::cout << std::right << _format_string(lname) << "|";
-	std::cout.width(10); std::cout << std::right << _format_string(nname) << std::endl;
+	std::cout.width(10); std::cout << std::right << formatString(index) << "|";
+	std::cout.width(10); std::cout << std::right << formatString(fname) << "|";
+	std::cout.width(10); std::cout << std::right << formatString(lname) << "|";
+	std::cout.width(10); std::cout << std::right << formatString(nname) << std::endl;
 }
 
-bool	PhoneBook::_check_input(std::string s)
+bool	PhoneBook::checkInput(std::string s)
 {
 	if (s.empty())
 	{
@@ -58,7 +58,7 @@ bool	PhoneBook::_check_input(std::string s)
 	return true;
 }
 
-std::string	PhoneBook::_get_input(std::string message)
+std::string	PhoneBook::getInput(std::string message)
 {
 	std::string	s;
 
@@ -68,7 +68,7 @@ std::string	PhoneBook::_get_input(std::string message)
 	if (std::cin.eof())
 		s.clear();
 	else
-		s = this->_check_input(s) ? s : _get_input(message);
+		s = this->checkInput(s) ? s : getInput(message);
 	return s;
 }
 
@@ -78,22 +78,22 @@ int	PhoneBook::add()
 
 	try {
 		contact = new Contact(
-		_get_input("Please enter new contact's first name"),
-		_get_input("Please enter new contact's last name"),
-		_get_input("Please enter new contact's nickname"),
-		_get_input("Please enter new contact's phone number"),
-		_get_input("Please enter new contact's darkest secret")
+		getInput("Please enter new contact's first name"),
+		getInput("Please enter new contact's last name"),
+		getInput("Please enter new contact's nickname"),
+		getInput("Please enter new contact's phone number"),
+		getInput("Please enter new contact's darkest secret")
 		);
 	}
 	catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 		return 1;
 	}
-	_set_contact(contact);
+	setContact(contact);
 	return 0;
 }
 
-std::string	PhoneBook::_intToString(int n)
+std::string	PhoneBook::intToString(int n)
 {
 	std::ostringstream ss;
 	ss << n;
@@ -104,24 +104,24 @@ void	PhoneBook::search()
 {
 	std::string	index;
 
-	if (this->_len == 0)
+	if (this->len == 0)
 	{
 		std::cout << ("No contact in the phonebook, please add some\n");
 		return;
 	}
-	_format_print("index", "first name", "last name","nickname");
-	for (int i = 0; i < this->_len; i++)
-		_format_print(this->_intToString(i), this->_contact[i]->get_fname(), this->_contact[i]->get_lname(), this->_contact[i]->get_nname());
-	index = _get_input("Please choose the contact that you wish to acces to");
+	formatPrint("index", "first name", "last name","nickname");
+	for (int i = 0; i < this->len; i++)
+		formatPrint(this->intToString(i), this->contact[i]->getFname(), this->contact[i]->getLname(), this->contact[i]->getNname());
+	index = getInput("Please choose the contact that you wish to acces to");
 	if (std::cin.eof())
 		return ;
-	while (!std::cin.eof() && (index.length() == 0 || index.length() > 1 || !::isdigit(index[0]) || index[0] >= this->_len + '0'))
-		index = _get_input("Wrong index, please choose the contact that you wish to acces to");
+	while (!std::cin.eof() && (index.length() != 1 || !isdigit(index[0]) || index[0] >= this->len + '0'))
+		index = getInput("Wrong index, please choose the contact that you wish to acces to");
 	if (std::cin.eof())
 		return ;
-	std::cout << "First name:\t" << this->_contact[index[0] - '0']->get_fname() << std::endl;
-	std::cout << "Last name:\t" << this->_contact[index[0] - '0']->get_lname() << std::endl;
-	std::cout << "Nickname:\t" << this->_contact[index[0] - '0']->get_nname() << std::endl;
-	std::cout << "Phone number:\t" << this->_contact[index[0] - '0']->get_phone() << std::endl;
-	std::cout << "Darkest secret:\t" << this->_contact[index[0] - '0']->get_secret() << std::endl;
+	std::cout << "First name:\t" << this->contact[index[0] - '0']->getFname() << std::endl;
+	std::cout << "Last name:\t" << this->contact[index[0] - '0']->getLname() << std::endl;
+	std::cout << "Nickname:\t" << this->contact[index[0] - '0']->getNname() << std::endl;
+	std::cout << "Phone number:\t" << this->contact[index[0] - '0']->getPhone() << std::endl;
+	std::cout << "Darkest secret:\t" << this->contact[index[0] - '0']->getSecret() << std::endl;
 }
