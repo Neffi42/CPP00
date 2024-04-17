@@ -1,17 +1,17 @@
 #include "Harl.hpp"
 
 Harl::Harl() {
-	this->_levels["DEBUG"] = &Harl::debug;
-	this->_levels["INFO"] = &Harl::info;
-	this->_levels["WARNING"] = &Harl::warning;
-	this->_levels["ERROR"] = &Harl::error;
+	this->levels["DEBUG"] = &Harl::debug;
+	this->levels["INFO"] = &Harl::info;
+	this->levels["WARNING"] = &Harl::warning;
+	this->levels["ERROR"] = &Harl::error;
 }
 
 Harl::~Harl() {}
 
-void Harl::complain(std::string level) {
-	if (this->_levels.find(level) != this->_levels.end())
-		(this->*_levels[level])();
+void Harl::complain(const std::string &level) {
+	if (this->levels.find(level) != this->levels.end())
+		(this->*levels[level])();
 }
 
 void Harl::debug() {

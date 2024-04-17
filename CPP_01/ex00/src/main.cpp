@@ -1,7 +1,6 @@
 #include "Zombie.hpp"
 
-int	main()
-{
+int	main() {
 	Zombie	*zonzon = newZombie("zonzon");
 	if (!zonzon)
 		return 1;

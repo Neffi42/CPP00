@@ -8,13 +8,13 @@
 
 class Sed {
 private:
-	std::ifstream	_in;
-	std::ofstream	_out;
-	std::string		_find;
-	std::string		_replace;
-	void 			_replaceAll(std::string &line);
+	std::ifstream	in;
+	std::ofstream	out;
+	std::string		find;
+	std::string		replace;
+	void 			replaceAll(std::string &line);
 public:
-	Sed(char *name, std::string find, std::string replace);
+	Sed(const std::string &name, const std::string &find, const std::string &replace);
 	~Sed();
 	void copyFile();
 };
