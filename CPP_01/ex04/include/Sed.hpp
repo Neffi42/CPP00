@@ -14,7 +14,7 @@ private:
 	std::string		replace;
 	void 			replaceAll(std::string &line);
 public:
-	Sed(const std::string &name, const std::string &find, const std::string &replace);
+	Sed(std::string name, const std::string &find, const std::string &replace);
 	~Sed();
 	void copyFile();
 };

@@ -1,10 +1,10 @@
 #include "Sed.hpp"
 
-Sed::Sed(const std::string &name, const std::string &find, const std::string &replace) {
+Sed::Sed(std::string name, const std::string &find, const std::string &replace) {
 	this->find = find;
 	this->replace = replace;
-	this->in.open(name);
-	this->out.open(std::strcat((char *)name.c_str(), ".replace"), std::ofstream::out | std::ofstream::trunc);
+	this->in.open(name.c_str());
+	this->out.open(name.append(".replace").c_str(), std::ofstream::out | std::ofstream::trunc);
 }
 
 Sed::~Sed() {
