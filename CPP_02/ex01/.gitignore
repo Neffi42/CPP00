@@ -1,0 +1,5 @@
+towardsAMoreUsefulFixedPointNumberClass
+objs
+*.o
+*.d
+*.a
