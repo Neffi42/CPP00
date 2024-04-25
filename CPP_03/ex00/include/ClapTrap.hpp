@@ -10,8 +10,8 @@ private:
 	unsigned int hp;
 	unsigned int energy;
 	unsigned int damage;
-	bool checkHp();
-	bool checkEnergy();
+	bool checkHp() const;
+	bool checkEnergy() const;
 public:
 	ClapTrap(const std::string &name);
 	~ClapTrap();
@@ -21,7 +21,7 @@ public:
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	void status();
+	void status() const;
 };
 
 #endif

@@ -57,8 +57,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		this->energy--;
 }
 
-bool ClapTrap::checkHp()
-{
+bool ClapTrap::checkHp() const {
 	if (this->hp > 0)
 		return true;
 	std::cout << "ClapTrap " << this->name << " is dead" << std::endl;
@@ -66,14 +65,13 @@ bool ClapTrap::checkHp()
 }
 
 
-bool ClapTrap::checkEnergy()
-{
+bool ClapTrap::checkEnergy() const {
 	if (this->energy > 0)
 		return true;
 	std::cout << "ClapTrap " << this->name << " has no energy" << std::endl;
 	return false;
 }
 
-void ClapTrap::status() {
+void ClapTrap::status() const {
 	std::cout << "ClapTrap " << this->name << " has " << this->hp << " health points and " << this->energy << " energy points" << std::endl;
 }
