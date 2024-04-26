@@ -1,0 +1,5 @@
+nowItIsWeird
+objs
+*.o
+*.d
+*.a

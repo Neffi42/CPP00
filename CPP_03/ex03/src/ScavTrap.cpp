@@ -1,5 +1,12 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap() {
+	this->hp = 100;
+	this->energy = 50;
+	this->damage = 20;
+	std::cout << "ScavTrap " << this->name << " has been created!" << std::endl;
+}
+
 ScavTrap::ScavTrap(const std::string &name): ClapTrap(name) {
 	this->hp = 100;
 	this->energy = 50;
@@ -11,7 +18,7 @@ ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << this->name << " has been destroyed!" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
+ScavTrap::ScavTrap(const ScavTrap &other) {
 	*this = other;
 	std::cout << "ScavTrap " << this->name << " has been copied!" << std::endl;
 }
