@@ -1,0 +1,5 @@
+repetitiveWork
+objs
+*.o
+*.d
+*.a
