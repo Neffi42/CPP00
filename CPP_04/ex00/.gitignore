@@ -1,0 +1,5 @@
+polymorphism
+objs
+*.o
+*.d
+*.a
