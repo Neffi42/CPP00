@@ -1,17 +1,27 @@
-#ifndef ANIMAL_H
-# define ANIMAL_H
+#include "Animal.hpp"
 
-# include <iostream>
-# include <string>
+Animal::Animal() {
+    std::cout << "Animal's default constructor called" << std::endl;
+    type = "";
+}
 
-class Animal {
-protected:
-    std::string type;
-public:
-    Animal();
-    Animal(const Animal &other);
-    ~Animal();
-    const Animal &operator=(const Animal &other);
-};
+Animal::Animal(const Animal &other) {
+    std::cout << "Animal's copy constructor called" << std::endl;
+    *this = other;
+}
 
-#endif
+Animal::~Animal() {
+    std::cout << "Animal's destructor called" << std::endl;
+}
+
+const Animal &Animal::operator=(const Animal &other) {
+    if (this != &other)
+        this->type = other.type;
+    return *this;
+}
+
+const std::string &Animal::getType() const {
+    return type;
+}
+
+void Animal::makeSound() const {}

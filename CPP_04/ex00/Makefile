@@ -20,7 +20,9 @@ OBJS_DIR    := objs
 SRC         :=	main.cpp \
 				Animal.cpp \
 				Dog.cpp \
-				Cat.cpp
+				Cat.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp
 INCLUDES    :=  $(INCLD_DIR)
 INCLD_FLAG  :=  $(addprefix -I , $(INCLUDES))
 OBJS        :=  $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))
