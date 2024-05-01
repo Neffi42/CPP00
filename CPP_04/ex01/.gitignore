@@ -1,0 +1,5 @@
+IDontWantToSetTheWorldOnFire
+objs
+*.o
+*.d
+*.a
