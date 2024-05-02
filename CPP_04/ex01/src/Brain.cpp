@@ -11,7 +11,8 @@ Brain::Brain(const Brain &other) {
 
 Brain::Brain(const std::string ideas[100]) {
     std::cout << "Brain's ideas constructor called" << std::endl;
-    std::memcpy(this->ideas, ideas, 100);
+    if (!ideas)
+        std::memcpy(this->ideas, ideas, 100);
 }
 
 

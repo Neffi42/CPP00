@@ -18,6 +18,7 @@ Cat::~Cat() {
 
 const Cat &Cat::operator=(const Cat &other) {
     if (this != &other) {
+        Animal::operator=(other);
         delete brain;
         brain = new Brain(other.brain->ideas);
     }
