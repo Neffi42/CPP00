@@ -1,0 +1,5 @@
+interfaceAndRecap
+objs
+*.o
+*.d
+*.a
