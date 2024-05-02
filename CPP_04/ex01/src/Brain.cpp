@@ -9,15 +9,18 @@ Brain::Brain(const Brain &other) {
     *this = other;
 }
 
+Brain::Brain(const std::string ideas[100]) {
+    std::cout << "Brain's ideas constructor called" << std::endl;
+    std::memcpy(this->ideas, ideas, 100);
+}
+
+
 Brain::~Brain() {
     std::cout << "Brain's destructor called" << std::endl;
 }
 
 const Brain &Brain::operator=(const Brain &other) {
-    if (this != &other) {
-        for (size_t i = 0; i < 100; i++) {
-            this->ideas[i] = other.ideas[i];
-        }
-    }
+    if (this != &other)
+        std::memcpy(ideas, other.ideas, 100);
     return *this;
 }

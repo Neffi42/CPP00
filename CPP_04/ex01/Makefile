@@ -1,5 +1,5 @@
 ### PROGRAM NAME ###
-NAME        := IDontWantToSetTheWorldOnFire
+NAME        := iDontWantToSetTheWorldOnFire
 
 ### UTILS ###
 CC          := c++
@@ -17,7 +17,13 @@ INCLD_DIR   := include
 OBJS_DIR    := objs
 
 ### FILES ###
-SRC         :=
+SRC         :=	Animal.cpp \
+				Brain.cpp \
+				Cat.cpp \
+				Dog.cpp \
+				main.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp
 INCLUDES    :=  $(INCLD_DIR)
 INCLD_FLAG  :=  $(addprefix -I , $(INCLUDES))
 OBJS        :=  $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))

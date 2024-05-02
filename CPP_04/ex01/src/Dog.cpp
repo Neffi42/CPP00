@@ -9,15 +9,18 @@ Dog::Dog() {
 Dog::Dog(const Dog &other) {
     std::cout << "Dog's copy constructor called" << std::endl;
     *this = other;
-    delete brain;
 }
 
 Dog::~Dog() {
     std::cout << "Dog's copy destructor called" << std::endl;
+    delete brain;
 }
 
 const Dog &Dog::operator=(const Dog &other) {
-    (void)other;
+    if (this != &other) {
+        delete brain;
+        brain = new Brain(other.brain->ideas);
+    }
     return *this;
 }
 

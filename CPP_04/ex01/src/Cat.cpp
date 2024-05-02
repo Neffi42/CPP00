@@ -17,7 +17,10 @@ Cat::~Cat() {
 }
 
 const Cat &Cat::operator=(const Cat &other) {
-    (void)other;
+    if (this != &other) {
+        delete brain;
+        brain = new Brain(other.brain->ideas);
+    }
     return *this;
 }
 
