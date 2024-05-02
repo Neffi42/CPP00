@@ -1,0 +1,5 @@
+abstractClass
+objs
+*.o
+*.d
+*.a
