@@ -17,7 +17,12 @@ INCLD_DIR   := include
 OBJS_DIR    := objs
 
 ### FILES ###
-SRC         :=
+SRC         :=	AMateria.cpp \
+				Character.cpp \
+				Cure.cpp \
+				Ice.cpp \
+				main.cpp \
+				MateriaSource.cpp
 INCLUDES    :=  $(INCLD_DIR)
 INCLD_FLAG  :=  $(addprefix -I , $(INCLUDES))
 OBJS        :=  $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))
