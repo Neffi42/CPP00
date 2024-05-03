@@ -6,13 +6,13 @@ Cat::Cat() {
     brain = new Brain();
 }
 
-Cat::Cat(const Cat &other) {
+Cat::Cat(const Cat &other): Animal(other) {
     std::cout << "Cat's copy constructor called" << std::endl;
     *this = other;
 }
 
 Cat::~Cat() {
-    std::cout << "Cat's copy destructor called" << std::endl;
+    std::cout << "Cat's destructor called" << std::endl;
     delete brain;
 }
 
