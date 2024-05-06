@@ -1,8 +1,11 @@
 #include "Animal.hpp"
 
-Animal::Animal() {
+Animal::Animal(): type("Default") {
     std::cout << "Animal's default constructor called" << std::endl;
-    type = "";
+}
+
+Animal::Animal(const std::string &type): type(type) {
+    std::cout << "Animal's type constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal &other) {
@@ -15,8 +18,9 @@ Animal::~Animal() {
 }
 
 const Animal &Animal::operator=(const Animal &other) {
-    if (this != &other)
+    if (this != &other) {
         this->type = other.type;
+    }
     return *this;
 }
 
