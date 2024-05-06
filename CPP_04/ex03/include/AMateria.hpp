@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include "ICharacter.hpp"
 
 class AMateria {
 protected:
@@ -10,7 +11,7 @@ protected:
 public:
 AMateria(const std::string &type);
 AMateria(const AMateria &other);
-~AMateria();
+virtual ~AMateria();
 const AMateria &operator=(const AMateria &other);
 
 const std::string &getType() const;
