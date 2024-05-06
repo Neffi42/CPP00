@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include <string>
-# include <cstring>
 
 class Brain {
 public:
