@@ -22,6 +22,7 @@ Brain::~Brain() {
 }
 
 const Brain &Brain::operator=(const Brain &other) {
+    std::cout << "Brain's copy assignement operator called" << std::endl;
     if (this != &other)
         for (size_t i = 0; i < 100; i++)
             this->ideas[i] = ideas[i];

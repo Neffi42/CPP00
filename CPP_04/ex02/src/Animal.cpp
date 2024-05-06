@@ -5,6 +5,10 @@ Animal::Animal() {
     type = "";
 }
 
+Animal::Animal(const std::string &type): type(type) {
+    std::cout << "Animal's type constructor called" << std::endl;
+}
+
 Animal::Animal(const Animal &other) {
     std::cout << "Animal's copy constructor called" << std::endl;
     *this = other;
@@ -15,6 +19,7 @@ Animal::~Animal() {
 }
 
 const Animal &Animal::operator=(const Animal &other) {
+    std::cout << "Animal's copy assignement operator called" << std::endl;
     if (this != &other)
         this->type = other.type;
     return *this;

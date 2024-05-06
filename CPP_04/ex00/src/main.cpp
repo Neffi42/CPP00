@@ -8,7 +8,6 @@ int main() {
 		Animal *dog = new Dog();
 		Animal *cat = new Cat();
 
-
 		std::cout << dog->getType() << std::endl;
 		std::cout << cat->getType() << std::endl;
 		dog->makeSound();

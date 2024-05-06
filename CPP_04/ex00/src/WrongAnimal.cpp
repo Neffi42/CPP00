@@ -2,7 +2,6 @@
 
 WrongAnimal::WrongAnimal(): type("Default") {
     std::cout << "WrongAnimal's default constructor called" << std::endl;
-    type = "";
 }
 
 WrongAnimal::WrongAnimal(const std::string &type): type(type) {
@@ -19,6 +18,7 @@ WrongAnimal::~WrongAnimal() {
 }
 
 const WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
+    std::cout << "WrongAnimal's copy assignement operator called" << std::endl;
     if (this != &other)
         this->type = other.type;
     return *this;
