@@ -20,11 +20,24 @@ const Dog &Dog::operator=(const Dog &other) {
     if (this != &other) {
         Animal::operator=(other);
         delete brain;
-        brain = new Brain(other.brain->ideas);
+        brain = new Brain(*other.brain);
     }
     return *this;
 }
 
 void Dog::makeSound() const {
     std::cout << "Dog says woof" << std::endl;
+}
+
+void Dog::setIdea(std::string idea, int index) {
+    if (index >= 0 && index < MAX_IDEA) {
+        brain->ideas[index] = idea;
+    }
+}
+
+std::string Dog::getIdea(int index) {
+    if (index >= 0 && index < MAX_IDEA) {
+        return brain->ideas[index];
+    }
+    return "";
 }

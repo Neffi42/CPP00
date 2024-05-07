@@ -13,6 +13,8 @@ public:
     ~Dog();
     const Dog &operator=(const Dog &other);
 
+    void setIdea(std::string idea, int index);
+    std::string getIdea(int index);
     void makeSound() const;
 };
 
