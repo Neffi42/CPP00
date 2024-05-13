@@ -10,7 +10,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade): name(name) {
         setGrade(grade);
     }
     catch(const std::exception& e) {
-        grade = 150;
+        this->grade = 150;
     }
 }
 
@@ -32,27 +32,33 @@ const Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 }
 
 void Bureaucrat::setGrade(int newGrade) {
-    try {
-        if (newGrade < 1) {
-            throw Bureaucrat::GradeTooHighException();
-        }
-        else if (newGrade > 150) {
-            throw Bureaucrat::GradeTooLowException();
-        }
+    if (newGrade < 1) {
+        throw Bureaucrat::GradeTooHighException();
+    }
+    else if (newGrade > 150) {
+        throw Bureaucrat::GradeTooLowException();
+    }
+    else {
         grade = newGrade;
+    }
+}
+
+void Bureaucrat::incrementGrade() {
+    try {
+        setGrade(grade - 1);
     }
     catch(const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
-
-}
-
-void Bureaucrat::incrementGrade() {
-    setGrade(grade - 1);
 }
 
 void Bureaucrat::decrementGrade() {
-    setGrade(grade + 1);
+    try {
+        setGrade(grade + 1);
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 int Bureaucrat::getGrade() const {
