@@ -5,7 +5,7 @@ Bureaucrat::Bureaucrat(): name("Default"), grade(150) {
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade): name(name) {
-    std::cout << "Bureaucrat's name and grade constructor called" << std::endl;
+    std::cout << "Bureaucrat's params constructor called" << std::endl;
     try {
         setGrade(grade);
     }
