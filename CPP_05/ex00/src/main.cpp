@@ -29,5 +29,10 @@ int main() {
         anny.incrementGrade();
         std::cout << anny << std::endl;
     }
+    std::cout << std::endl;
+    {
+        Bureaucrat john("John", 151);
+        std::cout << john << std::endl;
+    }
     return 0;
 }
