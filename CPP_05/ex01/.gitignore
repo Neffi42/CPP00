@@ -1,4 +1,5 @@
 formUpMaggots
+compile_flags.txt
 objs
 *.o
 *.d

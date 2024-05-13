@@ -17,9 +17,7 @@ INCLD_DIR   := include
 OBJS_DIR    := objs
 
 ### FILES ###
-SRC         :=	main.cpp \
-				Bureaucrat.cpp \
-				Form.cpp
+SRC         :=
 INCLUDES    :=  $(INCLD_DIR)
 INCLD_FLAG  :=  $(addprefix -I , $(INCLUDES))
 OBJS        :=  $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))

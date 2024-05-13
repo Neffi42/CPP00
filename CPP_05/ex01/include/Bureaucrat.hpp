@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 
-class Form;
-
 class Bureaucrat {
 private:
     const std::string name;
@@ -21,7 +19,6 @@ public:
     void decrementGrade();
     int getGrade() const;
     std::string getName() const;
-    void signForm(const Form &a) const;
 
     class GradeTooLowException: public std::exception {
     public:

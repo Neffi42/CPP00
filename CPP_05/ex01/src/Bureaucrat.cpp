@@ -6,7 +6,12 @@ Bureaucrat::Bureaucrat(): name("Default"), grade(150) {
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade): name(name) {
     std::cout << "Bureaucrat's name and grade constructor called" << std::endl;
-    setGrade(grade);
+    try {
+        setGrade(grade);
+    }
+    catch(const std::exception& e) {
+        this->grade = 150;
+    }
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other): name(other.name) {
@@ -27,27 +32,33 @@ const Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 }
 
 void Bureaucrat::setGrade(int newGrade) {
-    try {
-        if (newGrade < 1) {
-            throw Bureaucrat::GradeTooHighException();
-        }
-        else if (newGrade > 150) {
-            throw Bureaucrat::GradeTooLowException();
-        }
+    if (newGrade < 1) {
+        throw Bureaucrat::GradeTooHighException();
+    }
+    else if (newGrade > 150) {
+        throw Bureaucrat::GradeTooLowException();
+    }
+    else {
         grade = newGrade;
+    }
+}
+
+void Bureaucrat::incrementGrade() {
+    try {
+        setGrade(grade - 1);
     }
     catch(const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
-
-}
-
-void Bureaucrat::incrementGrade() {
-    setGrade(grade - 1);
 }
 
 void Bureaucrat::decrementGrade() {
-    setGrade(grade + 1);
+    try {
+        setGrade(grade + 1);
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 int Bureaucrat::getGrade() const {
