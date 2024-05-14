@@ -19,7 +19,6 @@ OBJS_DIR    := objs
 ### FILES ###
 SRC         :=	main.cpp \
 				Bureaucrat.cpp \
-				Form.cpp \
 				AForm.cpp \
 				ShrubberyCreationForm.cpp \
 				RobotomyRequestForm.cpp \
