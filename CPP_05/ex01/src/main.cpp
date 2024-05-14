@@ -1,7 +1,5 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
-#include <exception>
-#include <iostream>
 
 int main() {
     {

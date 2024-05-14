@@ -1,5 +1,4 @@
 #include "Form.hpp"
-#include <ostream>
 
 Form::Form(): name("Default"), sign(false), gradeToSign(150), gradeToExecute(150) {
     std::cout << "Form's default constructor called" << std::endl;
