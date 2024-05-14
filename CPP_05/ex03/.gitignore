@@ -1,0 +1,5 @@
+atLeastThisBeatsCoffeeMaking
+objs
+*.o
+*.d
+*.a
