@@ -59,6 +59,18 @@ void AForm::beSigned(const Bureaucrat &a) {
     }
 }
 
+void AForm::execute(const Bureaucrat &executor) const {
+    if (sign == false) {
+        throw  AForm::NotSigned();
+    }
+    else if (executor.getGrade() > gradeToExecute) {
+        throw AForm::GradeTooLowException();
+    }
+    else {
+        beExecuted();
+    }
+}
+
 const char *AForm::GradeTooLowException::what() const throw() {
     return "Grade is too low";
 }
@@ -69,6 +81,10 @@ const char *AForm::GradeTooHighException::what() const throw() {
 
 const char *AForm::AlreadySigned::what() const throw() {
     return "AForm is already signed";
+}
+
+const char *AForm::NotSigned::what() const throw() {
+    return "AForm is not signed";
 }
 
 std::ostream &operator<<(std::ostream &o, const AForm &a) {

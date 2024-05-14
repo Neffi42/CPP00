@@ -1,11 +1,12 @@
 #include "Bureaucrat.hpp"
+#include <exception>
 
 Bureaucrat::Bureaucrat(): name("Default"), grade(150) {
-    std::cout << "Bureaucrat's default constructor called" << std::endl;
+    std::cout << "Bureaucrat's default constructor called\n";
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade): name(name) {
-    std::cout << "Bureaucrat's params constructor called" << std::endl;
+    std::cout << "Bureaucrat's params constructor called\n";
     try {
         setGrade(grade);
     }
@@ -15,16 +16,16 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade): name(name) {
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other): name(other.name) {
-    std::cout << "Bureaucrat's copy constructor called" << std::endl;
+    std::cout << "Bureaucrat's copy constructor called\n";
     *this = other;
 }
 
 Bureaucrat::~Bureaucrat() {
-    std::cout << "Bureaucrat's destructor called" << std::endl;
+    std::cout << "Bureaucrat's destructor called\n";
 }
 
 const Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-    std::cout << "Bureaucrat's copy assignement operator called" << std::endl;
+    std::cout << "Bureaucrat's copy assignement operator called\n";
     if (this != &other) {
         setGrade(other.grade);
     }
@@ -48,7 +49,7 @@ void Bureaucrat::incrementGrade() {
         setGrade(grade - 1);
     }
     catch(const std::exception &e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << e.what() << "\n";
     }
 }
 
@@ -57,7 +58,7 @@ void Bureaucrat::decrementGrade() {
         setGrade(grade + 1);
     }
     catch(const std::exception &e) {
-        std::cerr << e.what() << std::endl;
+        std::cerr << e.what() << "\n";
     }
 }
 
@@ -69,12 +70,21 @@ std::string Bureaucrat::getName() const {
     return name;
 }
 
-void Bureaucrat::signForm(Form &a) {
+void Bureaucrat::signForm(AForm &a) {
     try {
         a.beSigned(*this);
-        std::cout << name << " signed " << a.getName() << std::endl;
+        std::cout << name << " signed " << a.getName() << "\n";
     } catch (const std::exception &e) {
-        std::cerr << name << " couldn't sign " << a.getName() << " because: " << e.what() << std::endl;
+        std::cerr << name << " couldn't sign " << a.getName() << " because: " << e.what() << "\n";
+    }
+}
+
+void Bureaucrat::executeForm(const AForm &form) {
+    try {
+        form.execute(*this);
+        std::cout << name << " executed " << form.getName() << "\n";
+    } catch (const std::exception &e) {
+        std::cerr << name << " couldn't execute " << form.getName() << " because: " << e.what() << "\n";
     }
 }
 

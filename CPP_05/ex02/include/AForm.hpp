@@ -28,6 +28,7 @@ public:
     int getGradeToExecute() const;
     void beSigned(const Bureaucrat &a);
     virtual void beExecuted() const = 0;
+    void execute(const Bureaucrat &executor) const;
 
     class GradeTooLowException: public std::exception {
     public:
@@ -38,6 +39,10 @@ public:
         virtual const char *what() const throw();
 	};
 	class AlreadySigned: public std::exception {
+    public:
+        virtual const char *what() const throw();
+	};
+    class NotSigned: public std::exception {
     public:
         virtual const char *what() const throw();
 	};
