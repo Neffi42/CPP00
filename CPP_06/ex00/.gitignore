@@ -1,0 +1,5 @@
+conversionOfScalarTypes
+objs
+*.o
+*.d
+*.a
