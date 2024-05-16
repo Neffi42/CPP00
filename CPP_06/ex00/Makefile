@@ -1,5 +1,5 @@
 ### PROGRAM NAME ###
-NAME        := conversionOfScalarTypes
+NAME        := convert
 
 ### UTILS ###
 CC          := c++
