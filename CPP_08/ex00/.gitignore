@@ -1,0 +1,5 @@
+easyFind
+objs
+*.o
+*.d
+*.a
