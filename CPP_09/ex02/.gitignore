@@ -1,0 +1,5 @@
+PmergeMe
+objs
+*.o
+*.d
+*.a
