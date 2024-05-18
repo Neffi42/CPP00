@@ -1,0 +1,5 @@
+mutatedAbomination
+objs
+*.o
+*.d
+*.a
