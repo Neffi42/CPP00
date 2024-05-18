@@ -30,10 +30,7 @@ const Span& Span::operator=(const Span&other) {
     std::cout << "Span's copy assignement operator called\n";
     if (this != &other) {
         N = other.N;
-        vec.clear();
-        vec.reserve(N);
-        vec.resize(N);
-        std::copy(other.vec.begin(), other.vec.end(), vec.begin());
+        vec = other.vec;
     }
     return *this;
 }
