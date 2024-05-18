@@ -1,0 +1,5 @@
+span
+objs
+*.o
+*.d
+*.a
