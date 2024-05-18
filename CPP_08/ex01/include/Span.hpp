@@ -19,7 +19,7 @@ public:
     int shortestSpan();
     int longestSpan();
     void fillSpan();
-    void print();
+    void print() const;
 
     class SpanFullException: public std::exception {
         virtual const char* what() const throw();

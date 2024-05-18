@@ -75,7 +75,7 @@ void Span::fillSpan() {
     std::generate(vec.begin(), vec.end(), std::rand);
 }
 
-void Span::print() {
+void Span::print() const {
     std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << "\n";
 }
