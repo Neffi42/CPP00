@@ -16,7 +16,7 @@ int main() {
     {
         Span sp = Span(100);
         sp.fillSpan();
-        sp.print();
+        // sp.print();
         std::cout << sp.shortestSpan() << "\n";
         std::cout << sp.longestSpan() << "\n";
     }

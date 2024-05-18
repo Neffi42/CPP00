@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <iterator>
+#include <vector>
 
 Span::Span(): N(5) {
     std::cout << "Span's default constructor called\n";
@@ -31,6 +32,7 @@ const Span& Span::operator=(const Span&other) {
         N = other.N;
         vec.clear();
         vec.reserve(N);
+        vec.resize(N);
         std::copy(other.vec.begin(), other.vec.end(), vec.begin());
     }
     return *this;
@@ -44,15 +46,32 @@ void Span::addNumber(int n) {
 }
 
 int Span::shortestSpan() {
-    return 0;
+    if (vec.size() < 2) {
+        throw NotEnoughIntException();
+    }
+
+    int shortest = 0;
+    int tmp = 0;
+    for (std::vector<int>::iterator i = vec.begin(); i != vec.end() - 1; i++) {
+        tmp = std::abs(*i - *(i + 1));
+        if (tmp < shortest || shortest == 0) {
+            shortest = tmp;
+        }
+    }
+
+    return shortest;
 }
 
 int Span::longestSpan() {
-    return 0;
+    if (vec.size() < 2) {
+        throw NotEnoughIntException();
+    }
+    return *std::max_element(vec.begin(), vec.end()) - *std::min_element(vec.begin(), vec.end());
 }
 
 void Span::fillSpan() {
-    std::srand(unsigned(std::time(nullptr)));
+    vec.resize(N);
+    std::srand(unsigned(std::time(NULL)));
     std::generate(vec.begin(), vec.end(), std::rand);
 }
 
