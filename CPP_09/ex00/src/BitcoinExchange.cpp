@@ -25,9 +25,15 @@ BitcoinExchange::~BitcoinExchange() {
 const BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
     std::cout << "BitcoinExchange's copy assignement operator called\n";
     if (this != &other) {
-        data = other.data;
+        m = other.m;
     }
     return *this;
+}
+
+static void trim(std::string& str)
+{
+    str.erase(str.find_last_not_of(SPACES)+1);         //suffixing spaces
+    str.erase(0, str.find_first_not_of(SPACES));       //prefixing spaces
 }
 
 static std::string itos(int i) {
@@ -106,6 +112,8 @@ void BitcoinExchange::processData() {
         }
         date = line.substr(0, pos);
         line.erase(0, pos + 1);
+        trim(date);
+        trim(line);
         if (date.empty() || line.empty() || parseDate(date) == false) {
             throw InvalidDataBaseException();
         }
@@ -113,29 +121,87 @@ void BitcoinExchange::processData() {
         if (errno == ERANGE || *end != '\0') {
             throw InvalidDataBaseException();
         }
-        data.insert(std::pair<std::string, float>(date, f));
+        m.insert(std::pair<std::string, float>(date, f));
     }
-    if (data.empty()) {
+    if (m.empty()) {
         throw InvalidDataBaseException();
     }
 }
 
-void BitcoinExchange::processInput(const char* inputFile) {
+void BitcoinExchange::processInput(const char* inputFile) const {
     std::ifstream file;
+    std::string line;
+    std::string date;
+    std::string dup;
+    size_t pos = 0;
+    char* end = NULL;
+    float f = 0;
+
     file.open(inputFile);
     if (file.bad()) {
         throw OpenInputException();
     }
+
+    std::getline(file, line);
+    if (line != "date | value") {
+        throw InvalidInputFileException();
+    }
+
+    while (file.eof() == false) {
+        std::getline(file, line);
+        if (line.empty()) {
+            continue;
+        }
+        dup = line;
+        if ((pos = line.find("|")) == std::string::npos) {
+            std::cerr << "Error: bad input => " << dup << "\n";
+            continue;
+        }
+        date = line.substr(0, pos);
+        line.erase(0, pos + 1);
+        trim(date);
+        trim(line);
+        if (date.empty() || line.empty()) {
+            std::cerr << "Error: bad input => " << dup << "\n";
+            continue;
+        }
+        else if (parseDate(date) == false) {
+            std::cerr << "Error: bad input => " << date << "\n";
+            continue;
+        }
+        f = strtof(line.c_str(), &end);
+        if (errno == ERANGE || *end != '\0') {
+            std::cerr << "Error: too large a number.\n";
+            continue;
+        }
+        else if (f <= 0) {
+            std::cerr << "Error: not a positive number\n";
+            continue;
+        }
+        calculateExchangeRate(date, f);
+    }
+}
+
+void BitcoinExchange::calculateExchangeRate(std::string date, float& f) const {
+    std::map<std::string, float>::iterator low =  m.lower_bound(date);
+    if (low == m.end()) {
+
+    }
+
 }
 
 const char* BitcoinExchange::OpenDataBaseException::what() const throw() {
-    return "Cannot open database file";
+    return "Error: could not open database file.";
 }
 
 const char* BitcoinExchange::InvalidDataBaseException::what() const throw() {
-    return "Database is invalid";
+    return "Error: database is invalid";
 }
 
 const char* BitcoinExchange::OpenInputException::what() const throw() {
-    return "Cannot open input file";
+    return "Error: could not open input file.";
+}
+
+const char* BitcoinExchange::InvalidInputFileException::what() const throw() {
+    return "Error: input file is invalid";
 }
