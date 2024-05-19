@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -184,10 +185,13 @@ void BitcoinExchange::processInput(const char* inputFile) const {
 
 void BitcoinExchange::calculateExchangeRate(std::string date, float& f) const {
     std::map<std::string, float>::iterator low =  m.lower_bound(date);
-    if (low == m.end()) {
-
+    if (low == m.begin()) {
+        std::cerr << "Error: no data for input => " << date << "\n";
     }
-
+    else {
+        low--;
+        std::cout << low->first << " => " << f << " = " << low->second * f << "\n";
+    }
 }
 
 const char* BitcoinExchange::OpenDataBaseException::what() const throw() {
