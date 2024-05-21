@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <iterator>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -171,7 +170,7 @@ void BitcoinExchange::processInput(const char* inputFile) const {
             continue;
         }
         f = strtof(line.c_str(), &end);
-        if (errno == ERANGE || *end != '\0') {
+        if (errno == ERANGE || *end != '\0' || f > 1000) {
             std::cerr << "Error: too large a number.\n";
             continue;
         }
@@ -184,7 +183,7 @@ void BitcoinExchange::processInput(const char* inputFile) const {
 }
 
 void BitcoinExchange::calculateExchangeRate(std::string date, float& f) const {
-    std::map<std::string, float>::iterator low =  m.lower_bound(date);
+    std::map<std::string, float>::const_iterator low =  m.lower_bound(date);
     if (low == m.begin()) {
         std::cerr << "Error: no data for input => " << date << "\n";
     }
