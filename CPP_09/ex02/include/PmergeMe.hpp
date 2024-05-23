@@ -3,6 +3,8 @@
 #include <ctime>
 #include <vector>
 
+#define THRESHOLD 2
+
 class PmergeMe {
 public:
     PmergeMe();
@@ -11,5 +13,5 @@ public:
 
     const PmergeMe& operator=(const PmergeMe& other);
 
-    static time_t sortVector(std::vector<int>& v);
+    static time_t mergeInsertionSortVector(std::vector<int>& v);
 };

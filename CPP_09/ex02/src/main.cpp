@@ -55,8 +55,9 @@ int main(int argc, char* argv[]) {
     }
 
     printVal("Before", v);
-    time_t timeV = PmergeMe::sortVector(v);
+    time_t timeV = PmergeMe::mergeInsertionSortVector(v);
 
+    printVal("After", v);
     printTime(v.size(), "vector", timeV);
 
     return 0;
