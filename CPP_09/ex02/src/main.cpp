@@ -18,7 +18,7 @@ static std::string itos(int i) {
 
 static void printVal(std::string key, std::vector<int>& v) {
     std::cout << key << ":\n";
-    std::cout << "\tstd::vector: ";
+    std::cout << "std::vector : ";
     for (std::vector<int>::iterator it = v.begin(); it != v.end(); it++) {
         std::cout << *it;
         if (it + 1 != v.end())

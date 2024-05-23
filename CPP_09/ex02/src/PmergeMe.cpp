@@ -123,7 +123,8 @@ static void sortVector(std::vector<int>& v) {
             v.push_back(it->first);
         v.push_back(it->second);
     }
-    pairs.push_back(lastOdd);
+    if (isOdd)
+        pairs.push_back(lastOdd);
 
     int currentIndex = 1, totalElements = pairs.size() - 1;
     std::vector< std::vector<int> > groups;
@@ -139,15 +140,14 @@ static void sortVector(std::vector<int>& v) {
         groups.push_back(group);
     }
 
-    for (std::vector<std::vector<int> >::iterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
-        std::vector<int>& group = *groupIt;
-        for (std::vector<int>::iterator elemIt = group.begin(); elemIt != group.end(); ++elemIt) {
-            int y = *elemIt;
+    for (std::vector<std::vector<int> >::iterator it = groups.begin(); it != groups.end(); ++it) {
+        std::vector<int>& group = *it;
+        for (std::vector<int>::iterator elId = group.begin(); elId != group.end(); ++elId) {
+            int y = *elId;
             int pos = binarySearch(v, y);
             v.insert(v.begin() + pos, y);
         }
     }
-
 }
 
 time_t PmergeMe::mergeInsertionSortVector(std::vector<int>& v) {
