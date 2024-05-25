@@ -5,16 +5,8 @@
 #include <cstddef>
 #include <iostream>
 #include <limits>
-#include <sstream>
 #include <string>
 #include <sys/errno.h>
-
-static std::string itos(int i) {
-    std::stringstream ss;
-
-    ss << i;
-    return ss.str();
-}
 
 static bool isChar(values &val) {
     if (val.s.length() != 1)
@@ -36,12 +28,14 @@ static bool isChar(values &val) {
 static bool isInt(values &val) {
     char *end;
 
+    if ((val.s.at(0) != '-' && val.s.length() > 10) || (val.s.at(0) == '-' && val.s.length() > 11))
+        return false;
     for (size_t i = val.s.at(0) == '-' ? 1 : 0; i < val.s.length(); i++) {
         if (!isdigit(val.s.at(i)))
             return false;
     }
     val.i = strtol(val.s.c_str(), &end, 10);
-    if (*end != '\0' || val.s != itos(val.i)) {
+    if (*end != '\0' || val.i > std::numeric_limits<int>::max() || val.i < std::numeric_limits<int>::min()) {
         val.i = 0;
         return false;
     }

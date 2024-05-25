@@ -17,7 +17,7 @@ typedef struct {
     const std::string &s;
     char c;
     bool cFlag;
-    int i;
+    long i;
     bool iFlag;
     float f;
     double d;
