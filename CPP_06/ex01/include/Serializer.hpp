@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cstdint>
 #include <string>
+#include <stdint.h>
 
 typedef struct {
     std::string name;
@@ -10,9 +10,8 @@ typedef struct {
 } Data;
 
 class Serializer {
-private:
-    Serializer();
 public:
+    virtual ~Serializer() = 0;
     static uintptr_t serialize(Data* ptr);
     static Data* deserialize(uintptr_t raw);
 };
