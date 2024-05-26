@@ -142,8 +142,6 @@ static void convertPseudo(values &val) {
 }
 
 static void printConvert(values &val) {
-    long long n = 0;
-
     std::cout << "char: ";
     if (val.cFlag == IMPOSSIBLE)
         std::cout << "impossible\n";
@@ -159,17 +157,15 @@ static void printConvert(values &val) {
         std::cout << val.i << "\n";
 
     std::cout << "float: ";
-    n = val.f;
     if (val.type == DOUBLE)
         std::cout << "impossible\n";
-    else if (val.f - n == 0.0)
+    else if (val.f -(long long)val.f == 0.0)
         std::cout << val.f << ".0f\n";
     else
         std::cout << val.f << "f\n";
 
     std::cout << "double: ";
-    n = val.d;
-    if (val.type == PSEUDO || val.d - n != 0.0)
+    if (val.type == PSEUDO || val.d - (long long)val.d != 0.0)
         std::cout << val.d << "\n";
     else
         std::cout << val.d << ".0\n";
