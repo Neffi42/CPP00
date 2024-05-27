@@ -19,7 +19,7 @@ static bool isChar(values &val) {
         return false;
     if (isdigit(val.s.at(0)))
         return false;
-    val.c = val.s.at(0);
+    val.c = static_cast<char>(val.s.at(0));
     val.type = CHAR;
     val.cFlag = OK;
     return true;
@@ -83,50 +83,60 @@ static bool isPseudo(values &val) {
 }
 
 static void convertChar(values &val) {
-    val.i = val.c;
-    val.f = val.c;
-    val.d = val.c;
+    val.i = static_cast<int>(val.c);
+    val.iFlag = OK;
+    val.f = static_cast<float>(val.c);
+    val.d = static_cast<double>(val.c);
 }
 
 static void convertInt(values &val) {
     if (val.i <= std::numeric_limits<char>::max() && val.i >= std::numeric_limits<char>::min()) {
         val.cFlag = OK;
-        val.c = val.i;
+        val.c = static_cast<char>(val.i);
     }
-    val.f = val.i;
-    val.d = val.i;
+    else {
+        val.cFlag = IMPOSSIBLE;
+    }
+    val.f = static_cast<float>(val.i);
+    val.d = static_cast<double>(val.i);
 }
 
 static void convertFloat(values &val) {
     if (val.f <= std::numeric_limits<char>::max() && val.f >= std::numeric_limits<char>::min()) {
         val.cFlag = OK;
-        val.c = val.f;
+        val.c = static_cast<char>(val.f);
+    }
+    else {
+        val.cFlag = IMPOSSIBLE;
     }
     if (val.f <= std::numeric_limits<int>::max() && val.f >= std::numeric_limits<int>::min()) {
         val.iFlag = OK;
-        val.i = val.f;
+        val.i = static_cast<int>(val.f);
     }
-    val.d = val.f;
+    else {
+        val.iFlag = IMPOSSIBLE;
+    }
+    val.d = static_cast<double>(val.f);
 }
 
 static void convertDouble(values &val) {
     if (val.d > std::numeric_limits<char>::max() && val.d < std::numeric_limits<char>::min())
         val.c = IMPOSSIBLE;
     else
-        val.c = val.d;
+        val.c = static_cast<char>(val.d);
     if (val.d > std::numeric_limits<int>::max() && val.d < std::numeric_limits<int>::min())
         val.i = std::numeric_limits<int>::max() + 1;
     else
-        val.i = val.d;
+        val.i = static_cast<int>(val.d);
     if (val.d <= std::numeric_limits<float>::max() && val.d >= std::numeric_limits<float>::min()) {
         val.type = FLOAT;
-        val.f = val.d;
+        val.f = static_cast<float>(val.d);
     }
 }
 
 static void convertPseudo(values &val) {
-    val.c = IMPOSSIBLE;
-    val.i = std::numeric_limits<int>::max() + 1;
+    val.cFlag = IMPOSSIBLE;
+    val.iFlag = IMPOSSIBLE;
     if (val.s == "nan") {
         val.f = std::numeric_limits<float>::quiet_NaN();
         val.d = std::numeric_limits<double>::quiet_NaN();

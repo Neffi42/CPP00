@@ -25,7 +25,8 @@ typedef struct {
 } values;
 
 class ScalarConverter {
+private:
+    ScalarConverter();
 public:
-    virtual ~ScalarConverter() = 0;
     static void convert(const std::string &s);
 };
