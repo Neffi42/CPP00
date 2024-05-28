@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -58,10 +59,30 @@ static bool processDateElement(const std::string& s, int lowLimit, int highLimit
     return true;
 }
 
+static std::map<int, int>createDaysMap() {
+    std::map<int, int> m;
+
+    m[1] = 31;
+    m[2] = 28;
+    m[3] = 31;
+    m[4] = 30;
+    m[5] = 31;
+    m[6] = 30;
+    m[7] = 31;
+    m[8] = 31;
+    m[9] = 30;
+    m[10] = 31;
+    m[11] = 30;
+    m[12] = 31;
+
+    return m;
+}
+
 static bool parseDate(const std::string& s) {
     size_t pos = 0;
     size_t pos2 = 0;
     std::string sub;
+    std::map<int, int> daysPerMonth = createDaysMap();
 
     if ((pos = s.find("-")) == std::string::npos) {
         return false;
@@ -72,13 +93,15 @@ static bool parseDate(const std::string& s) {
     if ((pos2 = s.find("-", pos)) == std::string::npos) {
         return false;
     }
-    if (!processDateElement(s.substr(pos, pos2++ - pos), 1, 12)) {
+    if (!processDateElement(s.substr(pos, pos2 - pos), 1, 12)) {
         return false;
     }
+    char *end;
+    int month = strtol(s.substr(pos, pos2++ - pos).c_str(), &end, 10);
     if ((pos = s.find("-", pos2)) != std::string::npos) {
         return false;
     }
-    if (!processDateElement(s.substr(pos2, s.size() - pos2), 1, 31)) {
+    if (!processDateElement(s.substr(pos2, s.size() - pos2), 1, daysPerMonth[month])) {
         return false;
     }
     return true;
