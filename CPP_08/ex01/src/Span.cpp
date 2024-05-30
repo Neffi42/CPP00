@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <iterator>
+#include <numeric>
 #include <vector>
 
 Span::Span(): N(5) {
@@ -46,17 +47,10 @@ int Span::shortestSpan() {
     if (vec.size() < 2) {
         throw NotEnoughIntException();
     }
-
-    int shortest = 0;
-    int tmp = 0;
-    for (std::vector<int>::iterator i = vec.begin(); i != vec.end() - 1; i++) {
-        tmp = std::abs(*i - *(i + 1));
-        if (tmp < shortest || shortest == 0) {
-            shortest = tmp;
-        }
-    }
-
-    return shortest;
+    std::vector<int> copy(vec);
+	std::sort(copy.begin(), copy.end());
+	std::adjacent_difference(copy.begin(), copy.end(), copy.begin());
+	return *std::min_element(copy.begin(), copy.end());
 }
 
 int Span::longestSpan() {
