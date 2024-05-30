@@ -15,7 +15,7 @@ const char* NoOccurenceException::what() const throw() {
 
 template <typename T>
 void easyfind(const T& container, int n) {
-    if (*(std::find(container.begin(), container.end(), n)) != n) {
+    if (std::find(container.begin(), container.end(), n) == container.end()) {
         throw NoOccurenceException();
     }
     else {
