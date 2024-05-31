@@ -2,20 +2,11 @@
 
 #include <cstddef>
 
-template <typename T>
-void iter(T* array, const size_t &len, void (*f)(const T&)) {
-	if (array == NULL || f == NULL)
+template <typename T, typename L, typename F>
+void iter(T* array, const L &len, F f) {
+	if (array == NULL || f == NULL || len < 0)
 		return ;
-    for (size_t i = 0; i < len; i++) {
-        f(array[i]);
-    }
-}
-
-template <typename T>
-void iter(T* array, const size_t &len, void (*f)(T&)) {
-	if (array == NULL || f == NULL)
-		return ;
-    for (size_t i = 0; i < len; i++) {
+    for (L i = 0; i < len; i++) {
         f(array[i]);
     }
 }
