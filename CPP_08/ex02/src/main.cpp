@@ -1,7 +1,23 @@
 #include "MutantStack.hpp"
+#include <deque>
 #include <iostream>
+#include <vector>
 
 int main() {
+	std::deque<int> myDeque(3,100);
+	std::vector<int> myVector(2,200);
+
+	MutantStack<int> first;
+	MutantStack<int> second(myDeque);
+
+	MutantStack<int, std::vector<int> > third;
+	MutantStack<int, std::vector<int> > fourth(myVector);
+
+	std::cout << "size of first: " << first.size() << '\n';
+	std::cout << "size of second: " << second.size() << '\n';
+	std::cout << "size of third: " << third.size() << '\n';
+	std::cout << "size of fourth: " << fourth.size() << '\n';
+
 	MutantStack<int> stack;
 	stack.push(0);
 	stack.push(1);
