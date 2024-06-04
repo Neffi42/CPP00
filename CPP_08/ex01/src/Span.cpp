@@ -9,26 +9,20 @@
 #include <vector>
 
 Span::Span(): N(5) {
-    std::cout << "Span's default constructor called\n";
     vec.reserve(N);
 }
 
 Span::Span(unsigned int N): N(N) {
-    std::cout << "Span's param constructor called\n";
     vec.reserve(N);
 }
 
 Span::Span(const Span& other) {
-    std::cout << "Span's copy constructor called\n";
     *this = other;
 }
 
-Span::~Span() {
-    std::cout << "Span's destructor called\n";
-}
+Span::~Span() {}
 
 const Span& Span::operator=(const Span&other) {
-    std::cout << "Span's copy assignement operator called\n";
     if (this != &other) {
         N = other.N;
         vec = other.vec;

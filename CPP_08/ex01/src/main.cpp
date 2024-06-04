@@ -27,5 +27,24 @@ int main() {
         std::cout << sp.shortestSpan() << "\n";
         std::cout << sp.longestSpan() << "\n";
     }
+    {
+		try {
+			Span sp(0);
+			sp.addNumber(1);
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+		}
+	}
+	{
+		try {
+			Span sp(1);
+			sp.addNumber(1);
+			std::cout << sp.longestSpan() << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+		}
+    }
     return 0;
 }
